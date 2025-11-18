@@ -1,4 +1,4 @@
-{const Note = require("../models/Notes");
+const Note = require("../models/Notes");
 const mongoose = require("mongoose");
 
 /**
@@ -21,7 +21,7 @@ exports.dashboard = async (req, res) => {
       { $sort: { updatedAt: -1 } },
       { $match: { user: mongoose.Types.ObjectId(req.user.id) } },
       {
-        $project: 
+        $project: {
           title: { $substr: ["$title", 0, 30] },
           body: { $substr: ["$body", 0, 100] },
         },
